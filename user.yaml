@@ -1,0 +1,23 @@
+#cloud-config
+hostname: ubuntu-vm
+
+users:
+  - name: chris
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOg1rjCzbqTIH85QQOBgrB8Q+saUlKh1s46wOwh5XGKw
+    groups: [docker]
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+package_update: true
+package_upgrade: true
+packages:
+  - docker-ce
+  - docker-ce-cli
+  - docker-compose
