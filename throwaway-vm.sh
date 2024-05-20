@@ -2,6 +2,7 @@
 VM_NAME="throwaway-vm"
 OS_VARIANT="ubuntu22.04"
 CLOUD_IMAGE="/var/lib/libvirt/images/jammy-server-cloudimg-amd64.img"
+DISK_SIZE_GB=10
 
 DIR=$(dirname -- "$0")
 USER_DATA="$(readlink -e "${DIR}/user.yaml")"
@@ -10,7 +11,7 @@ if [ ! -f "${USER_DATA}" ]; then
 fi
 
 function print_usage {
-    echo "usage: throwaway-vm.sh (start|stop)"
+    echo "usage: throwaway-vm.sh (start|stop)" >&2
 }
 
 function start {
@@ -21,7 +22,7 @@ function start {
         --os-variant "${OS_VARIANT}" \
         --network bridge=virbr0 \
         --nographics \
-        --disk size=10,backing_store="${CLOUD_IMAGE}" \
+        --disk size="${DISK_SIZE_GB},backing_store=${CLOUD_IMAGE}" \
         --cloud-init user-data="${USER_DATA}" \
         --noautoconsole
 }

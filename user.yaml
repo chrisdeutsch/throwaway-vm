@@ -1,5 +1,5 @@
 #cloud-config
-hostname: ubuntu-vm
+hostname: throwaway-vm
 
 users:
   - name: chris
@@ -7,6 +7,7 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOg1rjCzbqTIH85QQOBgrB8Q+saUlKh1s46wOwh5XGKw
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX+Eq+Y8cID7BXQruuzMupjW6ISc3RkNgMPc8GgQc86
     groups: [docker]
 
 apt:
